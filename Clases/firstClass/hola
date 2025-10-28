@@ -1,0 +1,15 @@
+nombre_articulo1 = input(f'Ingrese el nombre del primer artículo: ')
+precio_unitario1 = input(f'Ingrese el precio_unitario de {nombre_articulo}: ')
+cantidad_articulo1 = input(f'Ingrese la cantidad de {nombre_articulo} que desea comprar: ')
+
+nombre_articulo2 = input(f'Ingrese el nombre del primer artículo: ')
+precio_unitario2 = input(f'Ingrese el precio_unitario de {nombre_articulo}: ')
+cantidad_articulo2 = input(f'Ingrese la cantidad de {nombre_articulo} que desea comprar: ')
+
+nombre_articulo2 = input(f'Ingrese el nombre del primer artículo: ')
+precio_unitario2 = input(f'Ingrese el precio_unitario de {nombre_articulo}: ')
+cantidad_articulo2 = input(f'Ingrese la cantidad de {nombre_articulo} que desea comprar: ')
+
+
+
+

@@ -1,5 +1,6 @@
 # Fundamentos de programación
 
+# 1era Semana
 ## Unidad #1 Introducción a los lenguajes de programación
 Las computadoras hacen exactamente lo que nosotros les
 pedimos, pero debemos darles instrucciones precisas.
@@ -90,6 +91,10 @@ Sintaxis para definir variables en python
 ```Python
 nombre_de_la_variable = tipo_de_dato
 ```
+También podemos definir varias variables en una sola línea:
+```Python
+variable1, variable2, ..., variablen = valor1, valor2, ..., valorn # Respectivamente
+```
 
 ### Conversiones de tipos de datos
 Para convertir de un tipo de dato a otro
@@ -164,8 +169,9 @@ actualizar la información de la variable
 | División         |    /=     |
 
 
+# 2da Semana
 # Entradas y formatos de salida
-Las computadoras están en la capacidad interactuar con
+Las computadoras están en la capacidad de interactuar con
 los usuarios por medio de lo que el usuario le ordene.
 
 "Entradas" se refiere a lo que puede ingresar el
@@ -298,7 +304,7 @@ de caracteres.
 - Rebanadas desde **inicio** hasta **fin sin incluir**.
 - Su "salto" predeterminado es 1.
 
-## Operaciones con cadenas
+## Funciones en cadenas
 Ciertamente no podemos modificar cadenas de caracteres
 pero podemos manipularlas de esta forma:
 
@@ -314,27 +320,21 @@ orden alfabetico. Lo más cercano a "a" será menor.
 - max(x): devuelve el caracter mayor.
 
 **métodos:**
-- .title(): convierte en mayúscula la primera letra de 
-cada palabra de la cadena.
+- .title(): convierte en mayúscula la primera letra de cada palabra de la cadena.
 
-- .capitalize(): convierte en mayúscula la primera letra y el resto
-de la cadena en minúscula.
+- .capitalize(): convierte en mayúscula la primera letra y el resto de la cadena en minúscula.
 
 - .lower(): convierte a minúsculas todas las letras.
 
 - .upper(): convierte a mayúsculas todas las letras.
 
-- .replace(caracteres_anteriores, nuevos_caracteres): reemplaza todas las ocurrencias de la 
-cadena anterior por la cadena nueva.
+- .replace(caracteres_anteriores, nuevos_caracteres): reemplaza todas las ocurrencias de la cadena anterior por la cadena nueva.
 
-- .islower(): devuelve True si y solo si todas las letras 
-de la cadena están en minúsculas.
+- .islower(): devuelve True si y solo si todas las letras de la cadena están en minúsculas.
 
-- .isupper(): devuelve True si y solo si todas las letras
-de la cadena están en mayúsculas.
+- .isupper(): devuelve True si y solo si todas las letras de la cadena están en mayúsculas.
 
-- .isalpha(): devuelve True si todos los caracteres de la cadena
-son letras.
+- .isalpha(): devuelve True si todos los caracteres de la cadena son letras.
 
 - .isalnum(): devuelve True si los caracteres son letras o dígitos.
 
@@ -346,22 +346,24 @@ son letras.
 
 - .index(subcadena): devuelve el índice donde empieza la subcadena.
 
-- .split(separador): con el separador se divine la cadena y se genera una **lista** 
-de subcadenas.
+- .split(separador): con el separador se divine la cadena y se genera una **lista** de subcadenas. **.split(separador) ES ESTRICTO CON LA SUBCADENA QUE SEPARA LAS DEMÁS CADENAS**
 
+- **"separador".join(palabras.split())**
+
+# 3era Semana
 # Colección de datos list
 ## Listas
 - Las listas son un tipo de colección de datos.
 - Permiten almacenar un grupo de datos en una sola variable.
 
-### Características
+## Características
 - Los datos se guardan en orden.
 - Las listas son mutables (Se pueden modificar)
 - Los elementos se colocan entre []
 - Permite distintos tipos de datos.
 - Es posible crear una lista vacia con list() o []
 
-### Cómo actuan los operadores en las listas
+## Cómo actuan los operadores en las listas
 - "+" Unir o concaternar.
 - "*" Multiplicar o repetir un elemento (multiplicar por un entero).
 - del: eliminar un elemento.
@@ -372,31 +374,51 @@ de subcadenas.
 - lista[elemento_a_modificar] = dato_nuevo
 - lista[::-1] se lee al revés la lista
 
+## Operaciones con listas
+Existen funciones en python que pueden ser usadas para diferentes
+tipos de datos.
+- **len(lista)**: Devuelve cuantos elementos hay en la lista.
+- **min(lista)**: Devuelve el menor valor de la lista (Si y solo si son comparables).
+- **max(lista)**: Devuelve el mayor valor de la lista (Si y solo si son comparables).
+- **sum(lista)**: Suma todos los elementos de la lista.
+- **list(range(a, b, salto))**: Genera una secuencia de números enteros en una lista ("[a,b)").
+- **sorter(lista)**: Permite ordenar los elementos de la lista (De forma ascendente).
 
-## Módulo random
+También hay funciones **propias de listas**:
+- **.count(valor)**: Cuenta cuantas veces se repite un valor dentro de la lista.
+- **.index(valor)**, donde_empieza_a_buscar): Devuelve el índice donde está el valor en la lista (si hay varios elementos repetidos, devuelve la primera ocurrencia).
+- **.append(valor)**: Agrega un valor al final de la lista.
+- **.insert(idx, valor)**: Agrega un valor (Más no elimina el anterior) a la lista en la posición indicada.
+- **.remove(valor)**: Permite eliminar el valor de la lista.
+- **.pop(index)**: Quitar un elemento de la lista por su posición.
+               También "pop()" elimina y retorna el último elemento de la lista.
+
+
+
+# Módulo random
 Este módulo permite generar números aleatorios
 en un rango específico.
 
 - Se usa para juegos.
 - Se usa para seguirdad, ...
  
-### Importar el módulo random
+## Importar el módulo random
 ```Python
 import random
 import random as rd
 # Donde rd es una alias
 ```
 
-### random con números
+## random con números
 - random(): genera un decimal entre 0 y 1
-- ranint(inicio, final): genera un entero entre ese rango incluido
+- randint(inicio, final): genera un entero entre ese rango incluido
 el límite final
-- uniform(inicio, final): parecido a ranint pero con número decimales
+- uniform(inicio, final): parecido a randint pero con número decimales
 - **randrange(inicio, final)**: devuelve un número entero entre el rango
 establecido, además de que no incluye el final. También se puede usar
 de la siguiente forma "ranrange(inicio, final, salto)
 
-### random con listas
+## random con listas
 - choice(lista): selecciona un elemento aleatorio
 - choices(lista, k=n), selecciona aleatoriamente n elementos de la lista
   y pueden haber repetidos.
@@ -404,6 +426,128 @@ de la siguiente forma "ranrange(inicio, final, salto)
 - shuffle(lista): No retorna nada y desordena la lista original.
 
 
+# Funciones
+las funciones son pequeños bloques de código (pequeñas rutinas o programas) que son 
+reutilizables. Además las funciones tienen entradas o parámetros, también tienen salidas (retorno).
 
+Son de diferentes tipos:
+- Funciones de Python.
+- Funciones dentro de un módulo de Python.
+- Funciones definidas denntro del mismo programa.
 
+## Importancia de las funciones
+Es muy útil para solucionar un gran problema ya que podríamos considerar un conjunto funciones que solucionen cosas pequeñas de ese problema, y con esto llegar a resolver
+el problema del todo. "La solución a un problema es equivalente a solucionar cada parte de este".
+
+## Sintaxis de las funciones
+Para definir funciones seguimos la siguiente sintaxis.
+- Se usa la **Palabra reservada def** para **crear/definir** una función.
+- Las funciones tienen que tener un nombre único y descriptivo.
+- Los parámetros son las variables de entrada, separadas por comas, con los cuales
+trabajará la función.
+
+Luego de definir a la función viene el bloque de instrucciones:
+- Se trata de las instrucciones que tendrá la función.
+- Obviamente se utiliza sangría para diferenciar el bloque de instrucciones de la función (2 espacios).
+
+Después de que la función haya realizado las intrucciones, llega el momento
+en el que tendrá que dar la solución o el resultado. A eso se le llama retorno.
+- Se usa la **palabra reservada return** para devolver valores de variables o datos, separados por coma, los cuales son el resultado de la función. El retorno predeterminado en una función
+es el tipo de dato **none**. Aclarando que con la palabra return detenemos la función y el codigo
+que está abajo de return no se ejecutará.
+```Python
+def nombre_unico_funcion(parametro1, parametro2, ..., parametron)
+  bloque de instrucciones
+  return solucion1, solucion2 # solucion = variable
+
+# Para llamar a la función
+resultado = nombre_unico_funcion(variable1, variable2, ..., variablen)
+```
+
+## Alcance de las funciones
+Al momento de trabajar con una función, hay que tener claro que las variables
+declaradas en el bloque de instrucciones son **locales**, es decir solo existen dentro
+de la función.
+
+En cambio, desde el programa principal no se puede acceder las variables de las funciones por lo ya explicado y las variables declaradas en el programa principal son llamadas variables **globales**.
+
+Al momento de llamar a las funciones también podemos:
+```Python
+def nombre_unico_funcion(parametro1, parametro2, ..., parametron)
+  bloque de instrucciones
+  return solucion
+
+# Para llamar a la función
+resultado = nombre_unico_funcion(variable1=valor, variable2=valor, ..., variablen=valor)
+```
+Es decir, al momento de llamar a la función con sus respectivos parámetros, no hay necesidad
+de que los parámetros sean variables.
+
+### Parámetros con valor predeterminado
+Al momento de definir a la función también podemos darles valor por defecto a los parámetros:
+```Python
+def nombre_unico_funcion(parametro1=valor1, parametro2=valor2, ..., parametron=valorn)
+  bloque de instrucciones
+  return solucion
+
+# Para llamar a la función
+resultado = nombre_unico_funcion()
+```
+
+# Estructuras de control
+Hasta ahora, nosotros podemos hacer programas básicos, pedir
+datos al usuario, concatenar, hacer operaciones básicas, etc...
+
+Programas que se ejecutan una sola vez, además de que no hay comportamientos
+diferentes según el contexto (Se ejecutan de forma lineal).
+
+Las estructuras de control, justamente nos permiten tener mayor control
+durante la ejecución de nuestro programa. De esta forma nosotros podemos 
+hacer que nuestro programa tome desiciones establecidas (rutinas) dependiendo
+de la condición. Así nuestro programa es más interactivo con el usuario.
+
+## Condicionales
+Son un tipo de estructura de control donde nosotros podemos, en algún punto 
+del programa, hacer que el programa evalue condiciones para luego tomar
+desiciones con el fin de elegir la siguiente ruta.
+
+Con "condiciones a evaluar" nos referimos a verificar el tipo de dato
+"True" o "False".
+
+### Si...
+Para las condicionales se usa la palabra reservada **if**. **if** nos permite
+evaluar una condición (la cual retorna o verdadero o falso) y solo si el  resultado
+es True, ejecuta el bloque de instrucciones.
+
+### Si no se cumplió lo anterior, haz esto...
+Ahora, ¿cómo controlar el código cuando la condición establecida en nuestro **if** 
+es falsa y queremos seguir evaluando nuestro código? Para este tipo de casos tenemos
+la palabra reservada **elif**. **elif** permite evaluar otra condición cuando la anterior 
+condición evaluada fue falsa (elif establece una nueva ruta).
+
+### Si ninguna se cumplió, haz esto... (Caso contrario)
+¿Y si al final no se cumplió ninguna condición? Entonces usamos la palabra reservada **else**.
+**else** se ejecuta si ninguna de las anteriores condiciones se cumplieron. Pero en este caso
+else no permite evaluar condiciones y puede usarse **solo una vez**.
+
+Su sintaxis general es:
+```python
+# Programa principal
+# Instrucciones
+if condicion:
+  # Con sangría
+  Bloque de instrucciones
+  IntrucciónM
+
+elif condicion:
+  # Con sangría
+  Bloque de instrucciones
+  IntrucciónM
+
+else:
+  # Caso contrario
+  # Con sangría
+  Bloque de instrucciones
+  IntrucciónM
+```
 

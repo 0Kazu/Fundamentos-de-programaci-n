@@ -68,7 +68,7 @@ la extensión .py
 ## Unidad #2 Python
 ### Tipos de datos variables y conversiones
 Los tipos de datos son cómo se guarda la infomación
-contenida por una varibale en python.
+contenida por una varibale en python. (la computadora lo entiende)
 Los tipos de datos básicos son:
 - numéricos (int-enteros)
 - Reales (float-decimales)
@@ -94,7 +94,9 @@ nombre_de_la_variable = tipo_de_dato
 También podemos definir varias variables en una sola línea:
 ```Python
 variable1, variable2, ..., variablen = valor1, valor2, ..., valorn # Respectivamente
+<=> variable1 = valor1 and variable2 = valor2 and varibalen = valorn
 ```
+
 
 ### Conversiones de tipos de datos
 Para convertir de un tipo de dato a otro
@@ -133,9 +135,9 @@ Los tipos de datos son:
 | División         | /        |
 | División entera  | //       |
 | Módulo o residuo | %        |
-| Residuo          |     **   |
+| Elevar al cuadrado          |     **   |
 
-**Relacionales (Comparativos)**
+**Relacionales (Comparativos)** --> Te devuelve booleanos
 
 |Operador      |Símbolo       |
 |--------------|--------------|
@@ -185,7 +187,7 @@ Nosotros le hacemos saber por medio de un mensaje al usuario
 que este ya puede ingresar datos.
 
 > [!NOTE]
-> Todo tipo de dato ingresado es string
+> Todo tipo de dato ingresado se retorna como un string
 
 ### Ejemplo
 ```Python
@@ -220,7 +222,7 @@ los f-strings sirven para:
 
 **Sintaxis**
 ```Python
-print(f'texto{variable:caracter_de_relleno>espacio.decimales_a_redondear}')
+print(f'texto{variable:caracter_de_relleno>espacio.decimales_a_redondearf}')
 ```
 - Se muestra la variable con {}
 - Se puede reservar espacio con un entero **10**
@@ -259,7 +261,7 @@ cadenas de varias lineas
 
 ### Operadores para Strings
 - Para unir o **concatenar** (+)
-- Multiplicar o repetir (*)
+- Multiplicar o repetir (*) --> Por un entero
 - Igualdad en cadenas (==)
 - Diferencia en cadenas (!=)
 - Existe una cadena dentro de otra (in)
@@ -282,7 +284,7 @@ print(multiplicado)
 frase = "Varias palabras en cualquier orden"
 cadena = "palabra"
 resultado = cadena in frase
-print(resultado)
+print(resultado) # --> True
 ```
 
 ## indexación y rebanadas con str
@@ -301,7 +303,7 @@ de caracteres.
 **Sobre los índices:**
 - Inician en 0.
 - Se pueden usar positivos y negativos.
-- Rebanadas desde **inicio** hasta **fin sin incluir**.
+- Rebanadas desde **inicio** hasta **fin sin incluir**. --> [inicio, fin)
 - Su "salto" predeterminado es 1.
 
 ## Funciones en cadenas
@@ -348,7 +350,7 @@ orden alfabetico. Lo más cercano a "a" será menor.
 
 - .split(separador): con el separador se divine la cadena y se genera una **lista** de subcadenas. **.split(separador) ES ESTRICTO CON LA SUBCADENA QUE SEPARA LAS DEMÁS CADENAS**
 
-- **"separador".join(palabras.split())**
+- **"separador".join(palabras.split())** --> Listas
 
 # 3era Semana
 # Colección de datos list
@@ -382,7 +384,7 @@ tipos de datos.
 - **max(lista)**: Devuelve el mayor valor de la lista (Si y solo si son comparables).
 - **sum(lista)**: Suma todos los elementos de la lista.
 - **list(range(a, b, salto))**: Genera una secuencia de números enteros en una lista ("[a,b)").
-- **sorter(lista)**: Permite ordenar los elementos de la lista (De forma ascendente).
+- **sorted(lista)**: Permite ordenar los elementos de la lista (De forma ascendente).
 
 También hay funciones **propias de listas**:
 - **.count(valor)**: Cuenta cuantas veces se repite un valor dentro de la lista.
@@ -416,11 +418,11 @@ el límite final
 - uniform(inicio, final): parecido a randint pero con número decimales
 - **randrange(inicio, final)**: devuelve un número entero entre el rango
 establecido, además de que no incluye el final. También se puede usar
-de la siguiente forma "ranrange(inicio, final, salto)
+de la siguiente forma "ranrange(inicio, final, salto)"
 
 ## random con listas
-- choice(lista): selecciona un elemento aleatorio
-- choices(lista, k=n), selecciona aleatoriamente n elementos de la lista
+- choice(lista): retorna un elemento aleatorio
+- choices(lista, k=n), retorna aleatoriamente n elementos de la lista
   y pueden haber repetidos.
 - sample(lista, n): selecciona n datos distintos.
 - shuffle(lista): No retorna nada y desordena la lista original.
@@ -478,10 +480,12 @@ def nombre_unico_funcion(parametro1, parametro2, ..., parametron)
   return solucion
 
 # Para llamar a la función
-resultado = nombre_unico_funcion(variable1=valor, variable2=valor, ..., variablen=valor)
+resultado = nombre_unico_funcion(parametro1=valor, parametro2=valor, ..., parametron=valor)
 ```
 Es decir, al momento de llamar a la función con sus respectivos parámetros, no hay necesidad
 de que los parámetros sean variables.
+Se pueden crear variables temporales para llamar a una función con n parámetros siempre y cuando el nombres de las variables sea el nombre de dichos parámetros.
+
 
 ### Parámetros con valor predeterminado
 Al momento de definir a la función también podemos darles valor por defecto a los parámetros:
@@ -551,3 +555,55 @@ else:
   IntrucciónM
 ```
 
+# Estructuras de control repetitivas
+Hay diferentes tipos de estructura de control; las condicionales
+que ya hemos visto pero además están las repetitivas (lazos (loops), bucles).
+bucle for o ciclo for
+
+Entre estas estructuras de control repetitivas están el lazo for y
+el lazo while
+
+## Lazo for
+El lazo for permite recorrer/iterar en una secuencia 
+de elementos y en ese elemento de los que recorremos podemos
+ejecutar un bloque de código. De esta manera se ejecutará un mismo
+bloque de código por cada iteración del lazo for.
+
+-El lazo for permite repetir un bloque de código **un número
+conocido** de veces y con esto recorrer o iterar una secuencia (listas, strings, ...).
+
+-Un buen uso de range(n) es, justamente para for, en cuanto 
+a el número de veces que se va a repetir el código. (secuencia)
+
+-La cantidad de repeticiones está determinada por el número
+de elementos de la secuencia.
+
+
+Su sintaxis es:
+```Python
+for iterador in secuencia: # Palabras reservadas
+  # "iterador" es una variable temporal
+  # code
+```
+
+- Aclarando que el iterador tendrá cada valor en función al valor
+actual de la iteración en la secuencia.
+
+### Ejemplo for-each
+```Python
+lista = [3, 6, 12, 9, 1] # Definiendo una lista
+total = 0
+
+for elemento in lista:
+  total += elemento
+  print(total)
+
+# Primera iteración elemento = 3 --> total += 3
+# Segunda iteración elemento = 6 --> total += 6
+# Segunda iteración elemento = 12 --> total += 12
+# ...
+
+
+promedio = total / len(secuencia)
+print(f'El promedio es {promedio}')
+```

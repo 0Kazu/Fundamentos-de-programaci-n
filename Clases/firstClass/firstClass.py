@@ -1,16 +1,14 @@
-# Sin for, es necesario hacer uso de la recursividad.
+lista = [3, 6, 12, 9, 1] # Definiendo una lista
+total = 0
 
-def calcular_cuadrados(lista_numeros):
-	if lista_numeros == []:
-		return []
-	else:
-		primer_numero = lista_numeros[0]
-		cuadrado_primer_numero = primer_numero**2
+for elemento in lista:
+  total += elemento
+  print(total)
 
-		lista_restante = lista_numeros[1:]
-		lista_resultante = calcular_cuadrados(lista_restante) # Recursividad
+# Primera iteración elemento = 3 --> total += 3
+# Segunda iteración elemento = 6 --> total += 6
+# Segunda iteración elemento = 12 --> total += 12
+# ...
 
-		return [cuadrado_primer_numero] + lista_resultante
-	
-numeros = [2, 6, 8]
-print(calcular_cuadrados(numeros))
+promedio = total / len(lista)
+print(f'El promedio es {promedio}')

@@ -632,8 +632,8 @@ while condicion:
 
 Puesto que se trata de un bucle podemos usar **contadores** y **acumuladores**. 
 Pero, ¿De qué se tratan los contadores y acumuladores?
-contadores: variables que se usan para contar cada iteración en el bucle ("Simplemente es en qué número de iteración estamos")
-acumuladores: variables que se usan con el fin de acumular valores en cada iteración ("Sumar valores con datos obtenidos en cada iteración")
+- contadores: variables que se usan para contar cada iteración en el bucle ("Simplemente es en qué número de iteración estamos")
+- acumuladores: variables que se usan con el fin de acumular valores en cada iteración ("Sumar valores con datos obtenidos en cada iteración")
 
 Como se mencionó anteriormente, debemos establecer condiciones que siempre sean válidas. Esto es, no crear bucles infinitos
 ya que, el hecho de tener un bucle infinito implica que nuestro programa nunca se detenga.

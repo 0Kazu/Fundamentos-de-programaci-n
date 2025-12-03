@@ -498,7 +498,7 @@ def nombre_unico_funcion(parametro1=valor1, parametro2=valor2, ..., parametron=v
 resultado = nombre_unico_funcion()
 ```
 
-# Estructuras de control
+# Estructuras de control condicionales
 Hasta ahora, nosotros podemos hacer programas básicos, pedir
 datos al usuario, concatenar, hacer operaciones básicas, etc...
 
@@ -563,7 +563,7 @@ bucle for o ciclo for
 Entre estas estructuras de control repetitivas están el lazo for y
 el lazo while
 
-## Lazo for
+## Loop for (Lazo for)
 El lazo for permite recorrer/iterar en una secuencia 
 de elementos y en ese elemento de los que recorremos podemos
 ejecutar un bloque de código. De esta manera se ejecutará un mismo
@@ -607,3 +607,34 @@ for elemento in lista:
 promedio = total / len(secuencia)
 print(f'El promedio es {promedio}')
 ```
+
+## bucle While
+Mientras que en el loop for el bloque de código se repetía por cada elemento que se haya
+iterado en una lista, en el bucle while el bloque código se repite si se sigue cumpliendo
+cierta condición establecida.
+
+While sólo se repite si y sólo si la condición establecida es verdadera, cuando la condición
+deje de ser verdadera el bucle se detiende. De esta forma, si no se establece una condición 
+la cual se vaya a definir (sea verdadera siempre) puede hacer que el bucle nunca se detenga.
+
+Para ejecutar un bucle se usa la palabra reservada **while** seguido de la condición que
+se vaya a validar.
+
+Su sintaxis es:
+
+```Python
+while condicion:
+  instruccion1...
+  instruccion2...
+  ...
+  instruccionm...
+```
+
+Puesto que se trata de un bucle podemos usar **contadores** y **acumuladores**. 
+Pero, ¿De qué se tratan los contadores y acumuladores?
+contadores: variables que se usan para contar cada iteración en el bucle ("Simplemente es en qué número de iteración estamos")
+acumuladores: variables que se usan con el fin de acumular valores en cada iteración ("Sumar valores con datos obtenidos en cada iteración")
+
+Como se mencionó anteriormente, debemos establecer condiciones que siempre sean válidas. Esto es, no crear bucles infinitos
+ya que, el hecho de tener un bucle infinito implica que nuestro programa nunca se detenga.
+

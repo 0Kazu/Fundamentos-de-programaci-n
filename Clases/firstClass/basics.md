@@ -427,7 +427,7 @@ de la siguiente forma "ranrange(inicio, final, salto)"
 - sample(lista, n): selecciona n datos distintos.
 - shuffle(lista): No retorna nada y desordena la lista original.
 
-
+# 4ta semana
 # Funciones
 las funciones son pequeños bloques de código (pequeñas rutinas o programas) que son 
 reutilizables. Además las funciones tienen entradas o parámetros, también tienen salidas (retorno).
@@ -555,6 +555,7 @@ else:
   IntrucciónM
 ```
 
+# 5ta semana
 # Estructuras de control repetitivas
 Hay diferentes tipos de estructura de control; las condicionales
 que ya hemos visto pero además están las repetitivas (lazos (loops), bucles).
@@ -608,14 +609,14 @@ promedio = total / len(secuencia)
 print(f'El promedio es {promedio}')
 ```
 
-## bucle While
+## Bucle While
 Mientras que en el loop for el bloque de código se repetía por cada elemento que se haya
 iterado en una lista, en el bucle while el bloque código se repite si se sigue cumpliendo
 cierta condición establecida.
 
 While sólo se repite si y sólo si la condición establecida es verdadera, cuando la condición
 deje de ser verdadera el bucle se detiende. De esta forma, si no se establece una condición 
-la cual se vaya a definir (sea verdadera siempre) puede hacer que el bucle nunca se detenga.
+válida (sea verdadera siempre) puede hacer que el bucle nunca se detenga.
 
 Para ejecutar un bucle se usa la palabra reservada **while** seguido de la condición que
 se vaya a validar.
@@ -637,4 +638,195 @@ Pero, ¿De qué se tratan los contadores y acumuladores?
 
 Como se mencionó anteriormente, debemos establecer condiciones que siempre sean válidas. Esto es, no crear bucles infinitos
 ya que, el hecho de tener un bucle infinito implica que nuestro programa nunca se detenga.
+
+### Ejemplo de programa con While:
+```Python
+n = int(input("¿Cuántas facturas tiene? "))
+facturas = [] # Contador
+
+while len(facturas) < n:
+  valor = float(input(f'Factura: $'))
+  facturas.append(valor)
+
+total = sum(facturas)
+print(f'El total es: ${total}')
+```
+
+
+## Profundizando sobre contadores y acumuladores
+### Contadores
+Como se mencionó anteriormente, en un bucle es necesario guardar, 
+de alguna forma, el número de iteración en la que estamos. Normalmente
+los contadores son variables con tipos de datos numéricos enteros.
+
+Al ser un contador, este inicia o en 0 o en 1. Además, es usual que incremente
+su valor de 1 en 1.
+
+### Acumuladores
+Los acumuladores son variables que nos permiten almacenar valores importantes
+que dependan de cierto incremento. Usualmente es de tipo entero pero podría ser
+de cualquier otro tipo.
+
+```Python
+print('Ingrese sus facturas o cero para salir')
+facturas = []
+
+acumulador = 0
+
+valor = -1
+
+contador = 1
+
+while valor != 0:
+  valor = float(input(f'Factura {contador} $:'))
+  if valor != 0:
+    contador += 1
+    acumulador += valor
+
+print(f'Total: ${}')
+```
+
+# 6ta semana
+# Estructuras de control anidadas
+Al mezclar estructuras (anidar una condicional, un bucle, ...) podemos
+resolver un problema complejo de forma más efectiva.
+
+Para el efecto, basta con mostrar un ejemplo:
+
+### Ejemplo con if anidado en un for
+```Python
+n = int(input('Ingrese un número: '))
+
+divisores = []
+
+for i in range(1, n + 1):  # [1, 2, 3, ..., n]
+    if n % i == 0:
+        divisores.append(i)
+        # tenemos un if (estructura de control) anidada en un for (otra estructura de control)
+
+if len(divisores) == 2:
+    print(f'{n} es primo')
+else:
+    print(f'{n} NO es primo')
+    print(f'Divisores: {divisores}')
+```
+
+## Ejemplo de doble lazo o doble bucle
+```Python
+import random as rd
+
+primos = []
+
+while len(primos) < 3:
+    n = rd.randint(10, 100)
+    print(n, end=', ')
+
+    # Buscar divisores
+    if n not in primos:
+        divisores = []
+        for i in range(1, n + 1):  # Buscar divisores
+            if n % i == 0:
+                divisores.append(i)
+
+        if len(divisores) == 2:  # Si es primo
+            primos.append(n)
+
+print(f'\nNúmeros primos aleatorios:{primos}')
+```
+
+Por cierto "end=''" es un parámetro de la función print
+el cual permite modificar la salida del print. Por ejemplo:
+```Python
+print(n) <=> print(n, end='\n')
+```
+Con "end=', '" simplemente hacemos que "no salte a otra línea"
+```Python
+print(n, end=', ') # salida: 0, 1, 2, (en caso de for con 3 iteraciones)
+```
+
+
+# 7ma semana
+# Colecciones de datos 
+## Diccionarios
+Este es otro tipo de dato en el cuál podemos guardar aún más datos, es
+parecido a las listas pero en este accedemos a los elementos mediante 
+la relación clave-valor.
+
+### Sobre los diccionarios:
+- Se identifica con llaves {}
+- Los elementos NO se guardan en un orden específico (a diferencia de las listas).
+- Se puede crear un diccionario vacío con {} o con dict().
+- Los diccionarios, como las listas, son mutables.
+
+Su sintaxis es:
+```Python
+diccionario = {clave1:valor1,
+              clave2:valor2,
+              claven:valorn}
+```
+
+Por cierto, las claves solo pueden ser de tipo int, string o bool.
+Mientras que los valores pueden ser datos cualesquiera.
+
+Por lo tanto, nosotros podemos acceder a estos datos
+mediante su clave (De esta forma accedemos a su valor)
+
+Ahora, ¿Cómo puedo añadir valores a un diccionario?
+Suponga que desea añadir un valor nuevo (diferente a los anteriores)
+```Python
+diccionario_vacio = dict()
+
+# Para añadir un nuevo valor al diccionario
+diccionario_vacio['clave1'] = valor1
+
+# Para acceder a un valor del diccionario
+print(diccionario_vacio['clave1']) -> retorna el valor
+...
+# Con esto añadimos valores nuevos a un diccionario
+```
+
+Luego, ¿Cómo puedo eliminar valores?
+Hay 2 formas de eliminar valores en un diccionario:
+- **del nombre_diccionario[clave]**
+- **nombre_diccionario.pop(clave)** -> pop devuelve sólo el valor (no clave).
+
+Algo importante a tomar en cuenta es que, si consultamos un valor
+con una clave que no exista en el diccionario, el programa se detendrá
+y retornará un error.
+
+Para esto justamente están las funciones:
+- **nombre_diccionario.get(clave, predeterminado)**, la cual:
+  - Si existe la clave: retorna el valor asociado.
+  - No existe la clave: retorna de valor "predeterminado".
+
+- **nombre_diccionario.setdefault(clave, predeterminado)**, la cual: -> modifica el diccionario
+  - Si existe la clave: retorna el valor asociado.
+  - No existe la clave: inserta la clave con el valor de "predeterminado"
+    y luego, retorna el valor "predeterminado".
+
+### Funciones de diccionarios
+- **len(diccionario)**: Retorna la cantidad de elementos del diccionario.
+
+- **max(diccionario) or min(diccionario)**: Retorna el valor máximo o mínimo de los
+  diccionarios.
+
+- **nombre_diccionario.keys()**: Retorna una pseudo-lista con todas las claves del diccionario.
+
+Por cierto **pseudo-lista** es parecido al tipo de dato lista, más no lo es al 100%.
+
+- **nombre_diccionario.values()**: Retorna una pseudo-lista con todos los valores del diccionario.
+
+- **nombre_diccionario.items()**: Retorna una pseudo-lista de pares ordenados (clave, valor).
+
+Pero, ¿Cómo podemos recorrer diccionarios?
+De la siguiente forma:
+- **for clave in diccionario.keys()**: Recorrer las claves de un diccionario.
+
+- **for valor in diccionario.values()**: Recorrer los valores de un diccionario.
+
+- **for clave, valor in diccionario.items()**: Recorrer clave-valor. -> Forma recomendada
+  para recorrer diccionarios.
+
+# 8va semana
+# Arreglos (Numpy)
 

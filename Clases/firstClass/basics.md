@@ -882,7 +882,7 @@ print(arreglo)
 # Output
 # [dato1, dato2, ..., daton] -> vector (una dimensiones)
 ```
-Observe que el parámetro de np.array() es una lista. Como se menciono antes
+Observe que el parámetro de np.array() es una lista (nunca diccionarios). Como se menciono antes
 los arreglos son datos homogéneos por lo que si en la lista hay datos heterogéneos
 estos automáticamente, en el arreglo, se hacen de un mismo tipo de dato (o sólo int, o sólo string, ...)
 
@@ -891,7 +891,7 @@ En cuanto a la función np.array() de numpy, su sintaxis es la siguiente:
   arreglo = np.array(datos, tipo_de_dato)
   ```
   De donde:
-  - datos: listas que contengan los datos para el arreglo.
+  - datos: listas (no diccionarios) que contengan los datos para el arreglo.
   - tipo_de_dato: el tipo de dato que numpy convertirá a toda la lista de tal forma que sean homogéneos.
 
 Para crear un arreglo bidimensional hacemos lo siguiente:
@@ -906,7 +906,11 @@ print(arreglo)
 # [ [dato1, dato2, ..., daton]
 #   [dato1, dato2, ..., daton] ]
 ```
-Es decir, por cada lista anidada dentro de una lista (la general), tendremos una dimensión más. Observe que cada lista, es decir, cada *[dato1, dato2, ..., daton]* representa un vector unidimensional.
+Es decir, por cada lista anidada dentro de una lista (la general), tendremos una dimensión más. Observe que cada lista, es decir, cada *[dato1, dato2, ..., daton]* representa un vector unidimensional. De esta forma
+- Considere *[]* la lista general. Entonces:
+  - [dato1, ..., daton] -> vector de 1 dimensión.
+  - [ [dato1, ..., daton], [dato1, ..., daton] ] -> vector de 2 dimensiones.
+  - [ [ [dato1, ..., daton], [dato1, ..., daton] ] ] -> vector de 3 dimensiones.
 
 De esta forma, un arreglo no puede tener valores simples y vectores al mismo tiempo. Por ejemplo, el siguiente código retornaría error.
 ```Python
@@ -987,163 +991,261 @@ siguientes propiedades:
     ```
   
 - arr.shape:
+  - Retorna una tupla.
   - Número de elementos por cada vector (a cada vector le hace .size).
   - Indica cuantos elementos tiene el arreglo por cada una
   de sus dimensiones o ejes, por medio de una tupla.
   - En cuanto a una dimensión:
+    ```Python
+    import numpy as np
+
+    datos = ["dato1", "dato2", "dato3", "dato4"]
+
+    vector = np.array(datos)
+    print(vector.shape)
+
+
+    # Output
+    # (4,)
+    ```
+
+  - En cuanto a dos dimensiones:
+    ```Python
+    import numpy as np
+
+    datos1 = ["dato1", "dato2", "dato3", "dato4"]
+    datos2 = ["dato1", "dato2", "dato3", "dato4"]
+
+    vector = np.array([datos1, datos2])
+    print(vector.shape)
+
+    # Output
+    # (2,4) -> similar a matriz Amn, m filas, n columnas
+    ```
   
 
 - arr.dtype:
   - Muestra el tipo de dato de los elementos del arreglo.
+  - Ejemplo general:
+    ```Python
+    import numpy as np
 
-Además, para definir arreglos, lo hacemos de la siguiente forma
-```Python
-import numpy as np
+    datos1 = ["dato1", "dato2", "dato3", "dato4"]
+    datos2 = ["dato1", "dato2", "dato3", "dato4"]
 
-# 1 Dimensión
-arreglo = np.array([dato1, dato2, ..., daton])
+    vector = np.array([datos1, datos2])
+    print(vector.dtype)
 
-# 2 Dimensión
-arreglo = np.array([dato1, dato2, ..., daton], [dato1, dato2, ..., daton])
+    # Output
+    # <U5
+    ```
 
-```
-
-### Ejemplo
+## Ejemplo general
 ```Python
 import numpy as np
 
 arr1D = np.array([2, 4, 1, 8, 7, 0])
-arr2D = np.array([3, 1, 1, 7], 
+arr2D = np.array( [ [3, 1, 1, 7], 
                   [1, 1, 0, 2],
-                  [0, 3, 0, 2])
+                  [0, 3, 0, 2] ])
+
+print(arr2D)
 
 # Cantidad de elementos en los arrays
-print(arr1D.size)
-print(arr2D.size)
+print(arr1D.size) # Output: 6
+print(arr2D.size) # Output: 12
 
 # Ejes o índices en los arrays
-print(arr1D.ndim)
-print(arr2D.ndim)
+print(arr1D.ndim) # Output: 1
+print(arr2D.ndim) # Output: 2 (solo cuenta con filas y columnas)
 
 # Cantidad de elementos por ejes
 print(arr1D.shape) # Output: (6,) -> En el primer eje tengo 6 elementos (izq a derecha)
-print(arr2D.shape) # Output: (3, 4) (De arriba hacia abajo, luego de izquierda a derecha)
+print(arr2D.shape) # Output: (3, 4) - > De arriba hacia abajo, luego de izquierda a derecha.
 
 # Tipos de datos en los arrays
-print(arr1D.dtype)
-print(arr2D.dtype)
+print(arr1D.dtype) # Output: int64
+print(arr2D.dtype) # Output: int64
 ```
 
-## Creación de arreglos
-Para definir arreglos tenemos las siguientes funciones
-- np.array(lista(dimension1), lista2(dimension2), ..., listan(dimensionn)): Crea un arreglo a partir de una lista.
-- np.ones(tamaño, dtype="dato(float-int)"): Crea un arreglo "de unos" del tamaño indicado.
-- np.zeros(tamaño, dtype="dato(float-int)"): Crea un arreglo "lleno de ceros".
-  Por defecto np.zeros(tamaño) genera un arreglo de flotantes, para cambiar
-  a enteros: np.zeros(tamaño, int)
-- np.full(tamaño, valor): Crea un arreglo relleno de "valor" con su respectivo
-  tamaño.
-- np.arange(inicio, final, salto): Crea un arreglo con la secuencia indicada.
-- np.linspace(inicio, fin, tamaño): Crea una secuencia de elementos distribuidos
-  uniformemente y del tamaño indicado.
+## Funciones para creación de arreglos en numpy
+Para definir arreglos, además de la forma tradicional, tenemos las siguientes funciones:
+### Funciones que transforman datos a arreglos (Transformadoras):
+- **np.array(datos, tipo_de_dato)**: Crea un arreglo a partir de una lista **datos**.
+ - Tipos de datos disponibles (Van "en seco" de esa forma):
+  - str
+  - int
+  - bool
+  - float
 
-Note que estas funciones para crear arreglos, sirven para crear arreglos de una sola
-dimensión. Excepto por .ones, .zeros y .full (tamaño también puede ser una dimensión del vector)
+### Funciones que generan un arreglo desde 0 (Generadoras):
+#### Lineales o no
+- **np.ones(arr.shape, tipo_de_dato)**: Crea un arreglo "de unos" del arr.shape indicado con el tipo_de_dato indicado.
+- **np.zeros(arr.shape, tipo_de_dato)**: Crea un arreglo "lleno de ceros" del arr.shape indicado con el tipo_de_dato indicado.
+- **np.full(arr.shape, valor, tipo_de_dato)**: Crea un arreglo relleno de "valor"  del tamaño arr.shape con su respectivo tipo_de_dato.
 
-Así como están definidas las operaciones entre vectores, en Numpy podemos
-realizar operaciones entre arreglos:
+#### Sólo lineales
+- **np.arange(inicio, final, salto, tipo_de_dato)**: Crea un *arreglo unidimensional* con la secuencia indicada **(el final no se incluye)**.
+- **np.linspace(inicio, final, tamaño, tipo_de_dato)**: Crea una secuencia de elementos distribuidos uniformemente y del tamaño indicado. Es decir si queremos una secuencia solo con un vector de tamaño n, habrán n elemenos en el vector  **(el final sí se incluye)**.
 
-Pero antes, note que al ser "operaciones entre vectores" estas deben cumplir la
-condición de ser del mismo arr.shape (No exactamente como vectores en matemáticas)
-También, estas operaciones se ejecutan elemento a elemento (No hay necesidad de bucles)
+## Acceder a los elemenos de los vectores
+Ahora que ya sabemos cómo crear los vectores, procederemos a ver cómo acceder a cada elemento de éste.
 
-Veamos algunos ejemplos:
-** Vectores "iguales" **
-```Python
-import numpy as np
-
-parcial_1 = np.array([8, 9, 7])
-parcial_2 = np.array([9, 10, 6])
-
-nota_final = parcial_1 + parcial_2
-
-print(nota_final)
-# Resultado: [17 19 13]
-# (8+9, 9+10, 7+6)
-```
-
-** Operaciones con escalares **
-```Python
-vector = np.array([10, 20, 30])
-
-# Restar 5 a todos (como si fuera un vector [5, 5, 5])
-# Lo transforma al vector [5 5 5]
-resultado = vector - 5
-
-print(resultado)
-# Resultado: [ 5 15 25 ]
-```
-
-** Matrices entre vectores **
-```Python
-matriz = np.array([
-    [1, 1, 1],  # Fila 1
-    [2, 2, 2]   # Fila 2
-])
-
-vector = np.array([10, 20, 30])
-# Lo transforma a la matriz [10, 20, 30]
-#                           [10, 20, 30]
-
-# Suma: El vector se suma a la Fila 1 Y TAMBIÉN a la Fila 2
-suma = matriz + vector
-
-print(suma)
-# Resultado:
-# [[11 21 31]   <- (1+10, 1+20, 1+30)
-#  [12 22 32]]  <- (2+10, 2+20, 2+30)
-
-# booleanos: En cuanto a booleanos tenemos el siguiente comportamiento:
-# Considere arr_temperaturas un arreglo
-arr_condicion = arr_temperaturas > 28
-# Si arr_temperaturas = [30, 25, 29] entonces condicion = [True, False, True]
-
-# Considere que queremos filtrar un arreglo:
-print("4. Días con temperatura mayor a 28 grados:")
-
-arr_condicion = arr_temperaturas > 28
-# Se crear un arreglo tal que sus elementos son mayor a 28
-
-dias_filtrados = np.array(lista_semana)[condicion]
-# Se colocan los elementos que sí cumplen. Esto es:
-# "Solo me quedo con las posiciones donde se mantiene True"
-```
-
-## Indexación en vectores
+### Generalización de indexación en vectores
 Así como podemos acceder a los elementos en la listas, de igual forma
 podemos hacerlo con los arreglos o vectores:
 
 - Su índice empieza desde 0 (similar a una lista).
 - Se pueden usar índices positivos o negativos.
 - Permiten acceder a un elemento específico dentro del arreglo.
-- Accedemos (y agregamos) a un valor por medio: arr[elemento] = nuevo_valor
+- Accedemos (y agregamos) a un valor por medio de: 
+  - **arr[índice] = valor**
+  - **arr[arr.size - 1] = valor_nuevo**
+  - Cabe recalar que sólo se pueden modificar índices existentes.
 - Es posible hacer uso del slicing.
 - Es posible modificar elementos con el slicing.
 
+### Una dimensión
+En cuanto a vectores de 1 Dimensión tenemos la siguiente sintaxis:
+Su sintaxis es similar a acceder a un elemento a una lista, es decir:
+```Python
+arreglo[índice]
+```
+
+Por ejemplo:
+
+```Python
+import numpy as np
+
+arreglo = np.array([dato1, ..., daton])
+
+print(arreglo[0]) # Output: dato1
+```
+
+### Dos dimensiones
+En cuanto a vectores de 2 dimensiones tenemos la siguiente sintaxis:
+```Python
+arreglo[fila, columna]
+```
+Cabe recalcar que, las filas comienzan de 0. Es decir:
+```Python
+[1 0 0] # Fila 0
+[2 3 1] # Fila 1
+[3 1 0] # Fila 2
+```
+
+Por ejemplo:
+
+```Python
+import numpy as np
+
+arreglo = np.array([ [dato1, ..., daton], [datito1, ..., datiton] ])
+
+print(arreglo[1,n-1]) # Output: daton
+print(arreglo[1]) # Output [datito1, ..., datiton]
+```
+
+## Operaciones entre vectores
+Así como están definidas las operaciones entre vectores, en Numpy podemos
+realizar operaciones entre arreglos:
+
+Pero antes, note que al ser "operaciones entre vectores" estas deben cumplir la
+condición de ser del mismo arr.shape (No exactamente como vectores en matemáticas)
+También, estas operaciones se ejecutan elemento a elemento (No hay necesidad de bucles).
+
+### Operaciones normales
+Veamos algunos ejemplos:
+- **Vectores "iguales"**
+  ```Python
+  import numpy as np
+
+  parcial_1 = np.array([8, 9, 7])
+  parcial_2 = np.array([9, 10, 6])
+
+  nota_final = parcial_1 + parcial_2
+
+  print(nota_final)
+  # Resultado: [17 19 13]
+  # (8+9, 9+10, 7+6)
+  ```
+
+- **Operaciones con escalares**
+  ```Python
+  vector = np.array([10, 20, 30])
+
+  # Restar 5 a todos (como si fuera un vector [5, 5, 5])
+  # Lo transforma al vector [5 5 5]
+  resultado = vector - 5
+
+  print(resultado)
+  # Resultado: [ 5 15 25 ]
+  ```
+
+- **Matrices entre vectores**
+  ```Python
+  matriz = np.array([
+      [1, 1, 1],  # Fila 1
+      [2, 2, 2]   # Fila 2
+  ])
+
+  vector = np.array([10, 20, 30])
+
+  # Suma: El vector se suma a la Fila 1 Y TAMBIÉN a la Fila 2
+  suma = matriz + vector
+  # Es decir
+  # Lo transforma a la matriz [10, 20, 30]
+  #                           [10, 20, 30]
+
+  print(suma)
+  # Resultado:
+  # [[11 21 31]   <- (1+10, 1+20, 1+30)
+  #  [12 22 32]]  <- (2+10, 2+20, 2+30)
+  ```
+
+### Operaciones lógicas
+Considere los siguientes ejemplos:
+  ```Python
+  import numpy as np
+
+  alumnos = np.array(["Sebas", "Samuel", "María", "Juan"])
+  notas   = np.array([     10,          8,        9,      4])
+
+  pasaron = notas >= 7  
+  print(pasaron)
+  # Output: [True True True False]
+
+  # Modo máscara
+  # notas_aprobadas = [10 8 9 4][[True True True False]]
+  # Note que estamos indexando a notas en pasaron. Cuando i[índice] no es un 
+  # índice y es un booleano, se cambia a modo máscara. De donde se creará un
+  # nuevo arreglo [10 8 9]
+  notas_aprobadas = notas[pasaron]
+  print(notas_aprobadas)
+  # Output: [10  8  9]
+
+  nombres_pasaron = alumnos[pasaron]
+  print(nombres_pasaron)
+  # Output: ['Sebas' 'Samuel' 'María']
+
+  nombres_reprobados = alumnos[~pasaron] #-> negación
+  print(nombres_reprobados)
+  # Output: ['Juan']
+  ```
+
 ## Funciones de los arreglos
-- arr.astype(dtype): permite modificar el tipo de dato que almacena el arreglo arr.
-- arr.tolist(): permite convertir el arreglo en una lista (cada dimensión sera una lista).
-- arr.prod(arr): permite multiplicar los elementos del arreglo entre sí.
-- numpy.round(arr,n): redondea los elementos de a con n decimales.
-- np.sum(arr): Suma los elementos del arreglo arr.
-- np.mean(arr) and np.average(arr): Promedia los elementos del arreglo arr.
-- np.max(arr): valor máximo de arr.
-- np.min(arr): valor mínimo de arr.
-- np.argmax(arr): El índice del mayor valor de arr.
-- np.argmin(arr): El índice del menor valor de arr. 
-- np.sort(arr): Genera un nuevo arreglo ordenado ascendentemente, con los elementos de arr.
-- arr.sort(): Ordena internamente los elementos de a en forma ascendente sin retornar valor alguno.
-- np.argsort(arr): Devuelve un arreglo con los índices de ordenamiento para el arreglo arr.
+- **arr.astype(dtype)**: permite modificar el tipo de dato que almacena el arreglo arr.
+- **arr.tolist()**: permite convertir el arreglo en una lista (cada dimensión sera una lista).
+- **arr.prod(arr)**: permite multiplicar los elementos del arreglo entre sí.
+- **numpy.round(arr,n)**: redondea los elementos de a con n decimales.
+- **np.sum(arr)**: Suma los elementos del arreglo arr.
+- **np.mean(arr)** and **np.average(arr)**: Promedia los elementos del arreglo arr.
+- **np.max(arr)**: valor máximo de arr.
+- **np.min(arr)**: valor mínimo de arr.
+- **np.argmax(arr)**: El índice del mayor valor de arr.
+- **np.argmin(arr)**: El índice del menor valor de arr. 
+- **np.sort(arr)**: Genera un nuevo arreglo ordenado ascendentemente, con los elementos de arr.
+- **arr.sort()**: Ordena internamente **(No retorna nada)** los elementos de a en forma ascendente sin retornar valor alguno.
+- **np.argsort(arr)**: Devuelve un arreglo con los índices de ordenamiento para el arreglo arr.
 
 ## Numpy con random
 Al importar numpy también importamos np.random el cual nos permite generar
@@ -1151,20 +1253,8 @@ arrays enteros al instante (matrices, vectores, ...)
 ```Python
 import numpy as np
 
-parcial_1 = np.array([8, 9, 7])
-parcial_2 = np.array([9, 10, 6])
-
-nota_final = parcial_1 + parcial_2
-
-print(nota_final)
-# Resultado: [17 19 13]
-# (8+9, 9+10, 7+6)
-```Python
-import numpy as np
-
 arr_temperaturas = np.random.randint(22, 39, size=7)
 ```
-
 
 # 9na semana
 # Introducción al procesamiento de datos (librería pandas)
@@ -1176,14 +1266,13 @@ Para importar esta librería:
 ```Python
 import pandas as pd
 ```
-
 Se introducirá sobre estructuras de datos en Pandas.
 
 ## Estructura de datos
 Es una forma de organizar datos para ser utilizados eficientemente. Esta maravillosa
 librería ofrece 2 tipos de estructuras de datos: **Series** y **Dataframes**.
 
-### Series (serie[índice(clave)] = valor)
+### Series
 Estructuras unidimensionales que pueden crearse a partir de listas o diccionarios. Cada
 elemento de la serie tiene un índice asociado.
 
@@ -1193,6 +1282,10 @@ import pandas as pd
 serie = pd.Series(data, index=index)
 ```
 
+- El parámetro **data** corresponde a los datos de la serie (listas homogéneas o heterogéneas, no es como numpy).
+- El parámetro **index** corresponde a los índices que se emplearán en la serie.
+
+#### Asociar un nombre a la serie
 Para asociar un nombre a esta serie podemos:
 ```Python
 import pandas as pd
@@ -1201,10 +1294,7 @@ serie = pd.Series(data, index=index)
 
 serie.name = 'Nombre_de_la_serie'
 ```
-
-- El parámetro data corresponde a los datos de la serie (listas homogéneas o heterogéneas).
-- El parámetro index corresponde a los índices que se emplearán en la serie.
-
+#### Ejemplo general de serie
 Considere el siguiente ejemplo:
 ```Python
 import pandas as pd
@@ -1239,11 +1329,9 @@ Plantas Generadoras de Electricidad:
 8                    C.H. Manta
 dtype: object
 """
-
 # Note que se imprime tanto el índice como el valor asociado. Luego el tipo de arreglo
 ```
-
-Sobre agregar y eliminar datos en una serie:
+#### Slicing en series
 En las series es posible hacer slicing. Para el efecto, considere el siguiente ejemplo:
 ```Python
 import pandas as pd
@@ -1271,7 +1359,7 @@ dtype: object
 """
 ```
 
-Además podemos agregar datos de la misma forma que en los arreglos de Numpy. Por medio de su índice:
+Además podemos agregar datos de la misma forma que en diccionarios. Por medio de su índice:
 
 ```Python
 import pandas as pd
@@ -1307,8 +1395,8 @@ dtype: object
 """
 ```
 
-En caso de querer eliminar datos dentro de la serie, hacemos uso del método **drop()**.
-Aunque esta función no modifica a la serie original, lo que hace es crear una copia de esta pero sin el índice que hayamos solicitado eliminar.
+En caso de querer guadar una copia con datos elimnados dentro de la serie, hacemos uso del método **drop()**.
+Aunque este método no modifica a la serie original, lo que hace es crear una copia de esta pero sin el índice que hayamos solicitado eliminar.
 
 ```Python
 import pandas as pd
@@ -1326,7 +1414,7 @@ powerPlants = pd.Series([
     'Nueva hidroeléctrica'
 ])
 
-índice_eliminado = powerPlants.drop(7)
+índice_eliminado_serie = powerPlants.drop(7)
 
 # Output
 """

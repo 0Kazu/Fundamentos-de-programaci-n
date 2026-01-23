@@ -1,7 +1,5 @@
 import numpy as np
 
-datos = ["dato1", "dato2", "dato3", "dato4"]
-
-vector = np.array(datos)
-
-print(vector.ndim)
+datos = np.arange(2, 10, 1, int)
+datos[0] = 10
+print(datos)
